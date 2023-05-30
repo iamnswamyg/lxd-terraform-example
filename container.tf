@@ -20,7 +20,7 @@ resource "lxd_container" "salt" {
 
     properties = {
       name= "eth0"
-      network  = module.profile.network
+      network  = module.network.network
       "ipv4.address" = each.value.ip
     }
   }

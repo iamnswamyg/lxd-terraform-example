@@ -17,9 +17,16 @@ module "profile" {
 
   profile = {
       profile_name   = "salt-profile"
-      network_name   = "salt-network"
       pool_name      = "salt-pool"
       volume_name    = "salt-volume"
+  }
+
+}
+module "network" {
+  source = "./modules/network"
+
+  network = {
+      network_name   = "salt-network"
       ipv4   = "192.168.0.1/24"   
   }
 
