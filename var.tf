@@ -1,37 +1,44 @@
-variable "salt-master" {
-  description = "Name of the LXD container"
-  type        = string
-  default     = "salt-master"
-}
-variable "salt-minion" {
-  description = "Name of the LXD container"
-  type        = string
-  default     = "salt-minion"
-}
-
-variable "profile_name" {
-  description = "Name of the LXD profile"
-  type        = string
-  default     = "salt-profile"
-}
-
-variable "network_name" {
-  description = "Name of the LXD network"
-  type        = string
-  default     = "salt-network"
-}
-
-variable "pool_name" {
-  description = "Name of the LXD storage pool"
-  type        = string
-  default     = "salt-pool"
+variable "salt-network" {
+  description = "A map of salt configurations"
+  type        = object({
+    profile_name   = string
+    network_name   = string
+    pool_name      = string
+    volume_name    = string
+    ipv4   = string
+  })
+  default = {
+      profile_name   = "salt-profile"
+      network_name   = "salt-network"
+      pool_name      = "salt-pool"
+      volume_name    = "salt-volume"
+      ipv4   = "192.168.0.1/24"   
+  }
 }
 
 
-variable "volume_name" {
-  description = "Name of the LXD volume"
-  type        = string
-  default     = "salt-volume"
+variable "salt-instances" {
+  description = "A map of salt configurations"
+    type           = map(object({
+    name           = string
+    image          = string
+    ip             = string
+    master         = bool
+  }))
+  default = {
+    instance1 = {
+      name           = "salt-master"
+      image          = "salt-master"
+      ip             = "192.168.0.2"
+      master         = true
+    }
+    instance2 = {
+      name           = "salt-minion"
+      image          = "salt-minion"
+      ip             = "192.168.0.3"
+      master         = false
+    }
+  }
 }
 
 variable "profile_salt_share" {
@@ -45,37 +52,3 @@ variable "profile_pillar_share" {
   type        = string
   default     = "pillar-share"
 }
-
-variable "master_image" {
-  description = "Name of the LXD container image"
-  type        = string
-  default     = "salt-master"
-}
-
-variable "minion_image" {
-  description = "Name of the LXD container image"
-  type        = string
-  default     = "salt-minion"
-}
-
-variable "network_ipv4" {
-  description = "IPv4 address and subnet mask for the LXD network"
-  type        = string
-  default     = "192.168.0.1/24"
-}
-
-variable "salt_ip" {
-  description = "IPv4 address and subnet mask for the LXD network"
-  type        = string
-  default     = "192.168.0.2"
-}
-
-variable "minion_ip" {
-  description = "IPv4 address and subnet mask for the LXD network"
-  type        = string
-  default     = "192.168.0.3"
-}
-
-
-
-

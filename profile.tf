@@ -1,5 +1,5 @@
 resource "lxd_profile" "profile_name" {
-  name = var.profile_name
+  name = var.salt-network.profile_name
   
   
   device {
