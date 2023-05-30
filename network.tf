@@ -1,4 +1,4 @@
-resource "lxd_network" "sample_network" {
+resource "lxd_network" "network" {
   name = var.network_name
 
   config = {

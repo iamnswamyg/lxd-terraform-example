@@ -1,6 +1,6 @@
-resource "lxd_storage_pool" "sample_pool" {
+resource "lxd_storage_pool" "pool" {
   name = var.pool_name
-  driver = "dir"
+  driver = var.pool_driver
   config = {
     source = var.pool_source
   }

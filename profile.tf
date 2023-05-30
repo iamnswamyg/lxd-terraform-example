@@ -1,13 +1,14 @@
-resource "lxd_profile" "sample_profile" {
+resource "lxd_profile" "profile" {
   name = var.profile_name
-
+  
+  
   device {
     name = "eth0"
     type = "nic"
 
     properties = {
       name= "eth0"
-      network  = "${lxd_network.sample_network.name}"
+      network  = "${lxd_network.network.name}"
     }
   }
 
@@ -16,8 +17,26 @@ resource "lxd_profile" "sample_profile" {
     name = "root"
 
     properties = {
-      pool = "${lxd_storage_pool.sample_pool.name}"
+      pool = "${lxd_storage_pool.pool.name}"
       path = "/"
+    }
+  }
+
+  device {
+    type = "disk"
+    name= var.profile_pillar_share
+    properties = {
+      source = "${path.cwd}/salt-root/pillar"
+      path = "/srv/pillar"
+    }
+  }
+
+  device {
+    type = "disk"
+    name= var.profile_salt_share
+    properties = {
+      source = "${path.cwd}/salt-root/salt"
+      path = "/srv/salt"
     }
   }
 

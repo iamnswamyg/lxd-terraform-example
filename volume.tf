@@ -1,6 +1,6 @@
-resource "lxd_volume" "sample_volume" {
+resource "lxd_volume" "volume" {
   name = var.volume_name
-  pool = "${lxd_storage_pool.sample_pool.name}"
+  pool = "${lxd_storage_pool.pool.name}"
 
  
 }

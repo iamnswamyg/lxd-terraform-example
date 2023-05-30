@@ -1,31 +1,55 @@
 variable "container_name" {
   description = "Name of the LXD container"
   type        = string
-  default     = "sample-test"
+  default     = "salt-master"
+}
+
+variable "profile_name" {
+  description = "Name of the LXD profile"
+  type        = string
+  default     = "salt-profile"
+}
+
+variable "profile_salt_share" {
+  description = "Name of the LXD profile"
+  type        = string
+  default     = "salt-share"
+}
+
+variable "profile_pillar_share" {
+  description = "Name of the LXD profile"
+  type        = string
+  default     = "pillar-share"
+}
+
+variable "image_alias" {
+  description = "Alias for the published LXD image"
+  type        = string
+  default     = "salt-img"
+}
+
+variable "volume_name" {
+  description = "Name of the LXD volume"
+  type        = string
+  default     = "salt-volume"
+}
+
+variable "network_name" {
+  description = "Name of the LXD network"
+  type        = string
+  default     = "salt-network"
 }
 
 variable "image_name" {
   description = "Name of the LXD container image"
   type        = string
-  default     = "images:ubuntu/22.04"
+  default     = "salt-master"
 }
 
 variable "image_ephemeral" {
   description = "Whether the LXD container should be ephemeral"
   type        = bool
   default     = false
-}
-
-variable "profile_name" {
-  description = "Name of the LXD profile"
-  type        = string
-  default     = "sample_profile"
-}
-
-variable "volume_name" {
-  description = "Name of the LXD volume"
-  type        = string
-  default     = "sample_volume"
 }
 
 variable "volume_path" {
@@ -37,19 +61,18 @@ variable "volume_path" {
 variable "pool_name" {
   description = "Name of the LXD storage pool"
   type        = string
-  default     = "sample_pool"
+  default     = "pool"
+}
+variable "pool_driver" {
+  description = "Driver of the LXD storage pool"
+  type        = string
+  default     = "dir"
 }
 
 variable "pool_source" {
   description = "Source path for the LXD storage pool"
   type        = string
-  default     = "/var/snap/lxd/common/lxd/storage-pools/sample_pool"
-}
-
-variable "network_name" {
-  description = "Name of the LXD network"
-  type        = string
-  default     = "sample_network"
+  default     = "/var/snap/lxd/common/lxd/storage-pools/pool"
 }
 
 variable "network_ipv4" {
@@ -76,8 +99,4 @@ variable "network_ipv6_nat" {
   default     = false
 }
 
-variable "image_alias" {
-  description = "Alias for the published LXD image"
-  type        = string
-  default     = "sample_test_img"
-}
+
