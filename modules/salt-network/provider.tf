@@ -11,6 +11,4 @@ provider "lxd" {
     generate_client_certificates = true
     accept_remote_certificate    = true
 }
-module "salt" {
-  source = "./modules/salt-network"
-}
+
