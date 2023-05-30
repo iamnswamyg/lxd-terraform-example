@@ -30,7 +30,7 @@ resource "lxd_container" "salt" {
 
     content {
       type = "disk"
-      name= var.profile_pillar_share
+      name= "pillar-share"
       properties = {
         source = "${path.cwd}/salt-root/pillar"
         path = "/srv/pillar"
@@ -42,7 +42,7 @@ resource "lxd_container" "salt" {
 
     content {
       type = "disk"
-      name= var.profile_salt_share
+      name= "salt-share"
       properties = {
         source = "${path.cwd}/salt-root/salt"
         path = "/srv/salt"
