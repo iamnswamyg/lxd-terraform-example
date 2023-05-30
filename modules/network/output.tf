@@ -1,5 +1,5 @@
-output "salt_pool" {
-  value = lxd_storage_pool.salt_pool.name
+output "pool" {
+  value = lxd_storage_pool.pool.name
 }
 output "network" {
   value = lxd_network.network.name

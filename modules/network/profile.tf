@@ -1,5 +1,5 @@
 resource "lxd_profile" "profile_name" {
-  name = var.salt-network.profile_name
+  name = var.network.profile_name
   
   
   device {
@@ -7,7 +7,7 @@ resource "lxd_profile" "profile_name" {
     name = "root"
 
     properties = {
-      pool = "${lxd_storage_pool.salt_pool.name}"
+      pool = "${lxd_storage_pool.pool.name}"
       path = "/"
     }
   }

@@ -1,16 +1,16 @@
 resource "lxd_container" "salt" {
-  for_each = var.salt-instances
+  for_each = var.instances
 
   name          = each.value.name
   image         = each.value.image
   ephemeral     = false
   device {
-    name = module.salt.volume
+    name = module.network.volume
     type = "disk"
     properties = {
       path = "/lxd_temp"
-      source = module.salt.volume
-      pool = module.salt.salt_pool
+      source = module.network.volume
+      pool = module.network.pool
     }
   }
 
@@ -20,7 +20,7 @@ resource "lxd_container" "salt" {
 
     properties = {
       name= "eth0"
-      network  = module.salt.network
+      network  = module.network.network
       "ipv4.address" = each.value.ip
     }
   }
@@ -42,7 +42,7 @@ resource "lxd_container" "salt" {
 
     content {
       type = "disk"
-      name= "salt-share"
+      name= "share"
       properties = {
         source = "${path.cwd}/salt-root/salt"
         path = "/srv/salt"

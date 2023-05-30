@@ -10,13 +10,5 @@ variable "network" {
  
 }
 
-variable "instances" {
-  description = "A map of salt configurations"
-    type           = map(object({
-    name           = string
-    image          = string
-    ip             = string
-    master         = bool
-  }))
   
-}
+
