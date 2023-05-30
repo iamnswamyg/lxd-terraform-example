@@ -1,5 +1,5 @@
 resource "lxd_profile" "profile_name" {
-  name = var.network.profile_name
+  name = var.profile.profile_name
   
   
   device {

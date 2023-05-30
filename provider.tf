@@ -12,10 +12,10 @@ provider "lxd" {
     generate_client_certificates = true
     accept_remote_certificate    = true
 }
-module "network" {
-  source = "./modules/network"
+module "profile" {
+  source = "./modules/profile"
 
-  network = {
+  profile = {
       profile_name   = "salt-profile"
       network_name   = "salt-network"
       pool_name      = "salt-pool"

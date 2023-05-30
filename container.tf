@@ -5,12 +5,12 @@ resource "lxd_container" "salt" {
   image         = each.value.image
   ephemeral     = false
   device {
-    name = module.network.volume
+    name = module.profile.volume
     type = "disk"
     properties = {
       path = "/lxd_temp"
-      source = module.network.volume
-      pool = module.network.pool
+      source = module.profile.volume
+      pool = module.profile.pool
     }
   }
 
@@ -20,7 +20,7 @@ resource "lxd_container" "salt" {
 
     properties = {
       name= "eth0"
-      network  = module.network.network
+      network  = module.profile.network
       "ipv4.address" = each.value.ip
     }
   }

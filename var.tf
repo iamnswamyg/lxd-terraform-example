@@ -1,4 +1,4 @@
-variable "network" {
+variable "profile" {
   description = "A map of salt configurations"
   type        = object({
     profile_name   = string
