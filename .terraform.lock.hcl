@@ -1,0 +1,22 @@
+# This file is maintained automatically by "terraform init".
+# Manual edits may be lost in future updates.
+
+provider "registry.terraform.io/terraform-lxd/lxd" {
+  version = "1.9.1"
+  hashes = [
+    "h1:d50kyvBcAV97MiPv27I232jzWyFBem4a+3k1bwJtglU=",
+    "zh:2d40a3165b570580a556a56c89c8619f74569828256a1c1d362bc1f6dd0dccb8",
+    "zh:3f75339f5647964b5f4b05a7157d492b76af872cd4a88eae0b69612850cebdde",
+    "zh:47890805390b5abd96d3e7fd3bac9d51ca1f1adc2099a63a9278913d3652e1bc",
+    "zh:51a28ddcf87f39bb688efb3d88491054a406b44ec13c2f69081ad15f6a951cd3",
+    "zh:5e2f617bdea12b26906dc7294128e2b298b400c5b777992f1b7ec96e2f064af5",
+    "zh:659801fba87115c5793d2224b61605fce590134e3d9354f1589321d2946bb05d",
+    "zh:761bd2180e32e67f1c62c830f584d60bd200531a3696da19e6e306691e937955",
+    "zh:8923a3aa10f1d8f35d027ad6f1f828a020a04aad987459ed14991edb8dd69a1e",
+    "zh:98066c576850e7ad7167a642f9e0f481cfd2b48544c7defc06ee5235284b6aa4",
+    "zh:cb451dbc58e2b397e032b7eefb9daef903c865e8e078e8e066d0ba3032978d4c",
+    "zh:d8293ba728514feba7c757305e019176a3a1ab29d8b7305f464e2f5ba16fc5c7",
+    "zh:e4fb6d049f687d62f97553f3a933d15f9e6be105d96cf0b382a36e694e634fcb",
+    "zh:ea0c07126a3e4c44e6e20355ee2e36749ae2860d1b2c60338d473199ad52dd70",
+  ]
+}
