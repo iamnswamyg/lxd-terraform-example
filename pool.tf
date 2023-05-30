@@ -1,9 +1,7 @@
-resource "lxd_storage_pool" "pool" {
+resource "lxd_storage_pool" "salt_pool" {
   name = var.pool_name
-  driver = var.pool_driver
+  driver = "dir"
   config = {
-    source = var.pool_source
+    source = "/var/snap/lxd/common/lxd/storage-pools/${var.pool_name}"
   }
-
-  
 }

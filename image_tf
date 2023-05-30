@@ -1,8 +1,0 @@
-resource "lxd_publish_image" "image" {
-  depends_on = [ lxd_container.container ]
-
-  container = "${lxd_container.container.name}"
-  aliases   = [ lxd_container.container.name]
-
-  
-}

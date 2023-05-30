@@ -3,9 +3,9 @@ resource "lxd_network" "network" {
 
   config = {
     "ipv4.address" = var.network_ipv4
-    "ipv4.nat"     = var.network_ipv4_nat
-    "ipv6.address" = var.network_ipv6
-    "ipv6.nat"     = var.network_ipv6_nat
+    "ipv4.nat"     = true
+    "ipv6.address" = "none"
+    "ipv6.nat"     = false
   }
 
   
