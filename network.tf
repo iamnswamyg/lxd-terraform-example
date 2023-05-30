@@ -1,11 +1,11 @@
 resource "lxd_network" "sample_network" {
-  name = "sample_network"
+  name = var.network_name
 
   config = {
-    "ipv4.address" = "192.168.0.1/24"
-    "ipv4.nat"     = "true"
-    "ipv6.address" = "none"
-    "ipv6.nat"     = "false"
+    "ipv4.address" = var.network_ipv4
+    "ipv4.nat"     = var.network_ipv4_nat
+    "ipv6.address" = var.network_ipv6
+    "ipv6.nat"     = var.network_ipv6_nat
   }
 
   

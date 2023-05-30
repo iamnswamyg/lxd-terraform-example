@@ -1,5 +1,5 @@
 resource "lxd_profile" "sample_profile" {
-  name = "sample_profile"
+  name = var.profile_name
 
   device {
     name = "eth0"
