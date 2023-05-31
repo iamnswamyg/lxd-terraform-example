@@ -1,5 +1,4 @@
 resource "lxd_container" "salt" {
-  depends_on = [module.network]
   for_each = var.instances
 
   name          = each.value.name
@@ -21,7 +20,7 @@ resource "lxd_container" "salt" {
 
     properties = {
       name= "eth0"
-      network  = each.value.network_name
+      network  = module.network.network_names[each.value.network_name].name
       "ipv4.address" = each.value.ip
     }
   }
