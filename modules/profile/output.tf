@@ -1,6 +1,10 @@
-output "pool" {
-  value = lxd_storage_pool.pool.name
+output "profile" {
+  value = lxd_profile.profile_name.name
 }
-output "volume" {
-  value = lxd_volume.volume.name
+output "storage" {
+  value = {
+    pool=module.volume.storage.pool
+    volume= module.volume.storage.volume
+  }
 }
+

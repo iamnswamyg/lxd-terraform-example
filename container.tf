@@ -1,16 +1,18 @@
 resource "lxd_container" "salt" {
+
   for_each = var.instances
 
   name          = each.value.name
   image         = each.value.image
   ephemeral     = false
+
   device {
-    name = module.profile.volume
+    name = module.profile.storage.pool.name
     type = "disk"
     properties = {
       path = "/lxd_temp"
-      source = module.profile.volume
-      pool = module.profile.pool
+      source = module.profile.storage.volume.name
+      pool = module.profile.storage.pool.name
     }
   }
 

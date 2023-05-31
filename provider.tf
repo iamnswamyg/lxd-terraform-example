@@ -15,29 +15,22 @@ provider "lxd" {
 module "profile" {
   source = "./modules/profile"
 
-  profile = {
-      profile_name   = "salt-profile"
-      pool_name      = "salt-pool"
-      volume_name    = "salt-volume"  
-  }
+  profile = var.profile
+  storage = var.storage
 
 }
+
+
 module "network" {
   source = "./modules/network"
 
-   networks = {
-    salt-network = {
-      ipv4           = "192.168.0.1/24"
-      ipv4_enabled   = true
-      ipv6           = "none"
-      ipv6_enabled   = false
-    }
+   networks = var.networks
    
     
   }
     
     
-  }
+
 
   
 

@@ -7,7 +7,7 @@ resource "lxd_profile" "profile_name" {
     name = "root"
 
     properties = {
-      pool = "${lxd_storage_pool.pool.name}"
+      pool = module.volume.storage.pool.name
       path = "/"
     }
   }
