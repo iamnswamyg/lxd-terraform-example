@@ -4,57 +4,48 @@ resource "lxd_container" "salt" {
 
   name          = each.value.name
   image         = each.value.image
-  ephemeral     = false
+  ephemeral     = each.value.ephemeral
   profiles = [module.profile.profile_names[each.value.profile].name]
-  device {
-    name = module.profile.storage_pools[each.value.pool].name
-    type = "disk"
+  
+  dynamic "device" {
+    for_each = each.value.share_devices
+    content {
+      type        = "disk"
+      name        = device.value.name
     properties = {
-      path = "/lxd_temp"
-      source = module.profile.storage_volumes[each.value.volume].name
-      pool = module.profile.storage_pools[each.value.pool].name
-    }
-  }
-
-  device {
-    name = "eth0"
-    type = "nic"
-
-    properties = {
-      name= "eth0"
-      network  = "${module.network.network_names[each.value.network].name}"
-      "ipv4.address" = each.value.ip
+      source = "${path.cwd}/${device.value.properties.source}"
+      path   = device.value.properties.path
     }
   }
   
+  }
   dynamic "device" {
-    for_each = each.value.master ? [1] : []
-
+    for_each = each.value.pool_devices
     content {
-      type = "disk"
-      name= "pillar-share"
-      properties = {
-        source = "${path.cwd}/salt-root/pillar"
-        path = "/srv/pillar"
-      }
+      type        = "disk" 
+      name        = module.profile.storage_pools[device.value.properties.pool].name
+    properties = {
+      source = "${module.profile.storage_volumes[device.value.volume].name}"
+      path = device.value.properties.path
+      pool = module.profile.storage_pools[device.value.properties.pool].name
     }
   }
-    dynamic "device" {
-    for_each = each.value.master ? [1] : []
-
-    content {
-      type = "disk"
-      name= "share"
-      properties = {
-        source = "${path.cwd}/salt-root/salt"
-        path = "/srv/salt"
-        }
-    }
   }
 
-  start_container = true
+  dynamic "device" {
+    for_each = each.value.nic_devices
+    content {
+      type        = "nic" 
+      name        = device.value.name
+    properties = {
+      name                  = device.value.name
+      network               = "${module.network.network_names[device.value.properties.network].name}"
+      "ipv4.address"        = device.value.properties.ipv4
+    }
+  }
+  }
+  start_container = each.value.start
 }
-
 
 
 

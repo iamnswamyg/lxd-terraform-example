@@ -1,8 +1,8 @@
 resource "lxd_storage_pool" "pool" {
   for_each = var.pools
-  name = each.value
-  driver = "dir"
+  name = each.key
+  driver = each.value.driver
   config = {
-    source = "/var/snap/lxd/common/lxd/storage-pools/${each.value}"
+    source = "${each.value.source}/${each.key}"
   }
 }

@@ -1,13 +1,28 @@
 variable "profiles" {
   description = "A map of salt configurations"
-    type           = map(object({
-    pool         = string
+  type = map(object({
+    pool_devices = list(object({
+      name       = string
+      properties = object({
+        pool           = string
+        path           = string
+      })
+    }))
+    share_devices = list(object({
+      name       = string
+      properties = object({
+        source           = string
+        path           = string
+      })
+    }))
   }))
-  
 }
 variable "pools" {
  description = "A map of lxd storages"
-    type           = set(string)
+    type           = map(object({
+    driver         = string
+    source         = string
+  }))
   
 }
 
@@ -33,13 +48,36 @@ variable "instances" {
   description = "A map of salt configurations"
     type           = map(object({
     name           = string
+    ephemeral      = bool
     image          = string
-    network        = string
     profile        = string
-    pool           = string
-    volume         = string
-    ip             = string
-    master         = bool
+    start          = bool
+    pool_devices = list(object({
+      volume       = string
+      properties = object({
+        pool           = string
+        path           = string
+      })
+    }))
+    share_devices = list(object({
+      name       = string
+      properties = object({
+        source           = string
+        path           = string
+      })
+    }))
+    nic_devices = list(object({
+      name       = string
+      properties = object({
+        network        = string
+        ipv4           = string
+      })
+    }))
   }))
+    
   
 }
+
+
+
+
