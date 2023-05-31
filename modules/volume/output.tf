@@ -1,6 +1,6 @@
-output "storage" {
-  value = {
-    pool=lxd_storage_pool.pool
-    volume= lxd_volume.volume
-  }
+output "storage_volumes" {
+  value = { for volume in lxd_volume.volume : volume.name => volume }
+}
+output "storage_pools" {
+  value = module.pool.storage_pools
 }

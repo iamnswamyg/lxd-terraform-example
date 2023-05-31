@@ -7,15 +7,18 @@ terraform {
     }
   }
 }
+
 provider "lxd" {
     generate_client_certificates = true
     accept_remote_certificate    = true
 }
 
-module "volume" {
-  source = "./volume"
 
-  storages = var.storages
-  pools = var.pools
-}
+
+
+  
+
+
+
+
 

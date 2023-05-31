@@ -1,11 +1,13 @@
-variable "storage" {
-  description = "A map of lxd storages"
-  type        = object({
-    pool_name      = string
-    volume_name    = string
-  })
- 
-}
-
+variable "storages" {
+ description = "A map of lxd storages"
+    type           = map(object({
+    volume         = string
+  }))
   
+}  
 
+variable "pools" {
+ description = "A map of lxd storages"
+    type           = set(string)
+  
+}

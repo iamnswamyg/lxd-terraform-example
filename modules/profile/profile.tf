@@ -1,19 +1,16 @@
-resource "lxd_profile" "profile_name" {
-  name = var.profile.profile_name
-  
+resource "lxd_profile" "profile" {
+  for_each = var.profiles
+  name = each.key
   
   device {
     type = "disk"
     name = "root"
 
     properties = {
-      pool = module.volume.storage.pool.name
+      pool = "${module.volume.storage_pools[each.value.pool].name}"
       path = "/"
     }
   }
-
-  
-  
 }
 
 

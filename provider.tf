@@ -15,8 +15,9 @@ provider "lxd" {
 module "profile" {
   source = "./modules/profile"
 
-  profile = var.profile
-  storage = var.storage
+  profiles = var.profiles
+  storages = var.storages
+  pools = var.pools
 
 }
 

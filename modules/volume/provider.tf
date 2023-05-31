@@ -13,7 +13,12 @@ provider "lxd" {
     accept_remote_certificate    = true
 }
 
+module "pool" {
+  source = "../pool"
 
+  pools = var.pools
+
+}
 
 
   

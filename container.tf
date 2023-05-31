@@ -5,14 +5,14 @@ resource "lxd_container" "salt" {
   name          = each.value.name
   image         = each.value.image
   ephemeral     = false
-
+  profiles = [module.profile.profile_names[each.value.profile].name]
   device {
-    name = module.profile.storage.pool.name
+    name = module.profile.storage_pools[each.value.pool].name
     type = "disk"
     properties = {
       path = "/lxd_temp"
-      source = module.profile.storage.volume.name
-      pool = module.profile.storage.pool.name
+      source = module.profile.storage_volumes[each.value.volume].name
+      pool = module.profile.storage_pools[each.value.pool].name
     }
   }
 
@@ -22,7 +22,7 @@ resource "lxd_container" "salt" {
 
     properties = {
       name= "eth0"
-      network  = module.network.network_names[each.value.network_name].name
+      network  = "${module.network.network_names[each.value.network].name}"
       "ipv4.address" = each.value.ip
     }
   }

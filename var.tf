@@ -1,18 +1,23 @@
-variable "profile" {
+variable "profiles" {
   description = "A map of salt configurations"
-  type        = object({
-    profile_name   = string
-  })
- 
+    type           = map(object({
+    pool         = string
+  }))
+  
 }
-variable "storage" {
-  description = "A map of salt configurations"
-  type        = object({
-    pool_name      = string
-    volume_name    = string
-  })
- 
+variable "pools" {
+ description = "A map of lxd storages"
+    type           = set(string)
+  
 }
+
+variable "storages" {
+ description = "A map of lxd storages"
+    type           = map(object({
+    volume         = string
+  }))
+  
+} 
 variable "networks" {
   description = "A map of salt configurations"
     type           = map(object({
@@ -29,7 +34,10 @@ variable "instances" {
     type           = map(object({
     name           = string
     image          = string
-    network_name   = string
+    network        = string
+    profile        = string
+    pool           = string
+    volume         = string
     ip             = string
     master         = bool
   }))
