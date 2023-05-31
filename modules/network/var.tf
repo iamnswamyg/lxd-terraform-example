@@ -1,8 +1,11 @@
-variable "network" {
+variable "networks" {
   description = "A map of salt configurations"
-  type        = object({
-    network_name   = string
-    ipv4   = string
-  })
- 
+    type           = map(object({
+    ipv4           = string
+    ipv4_enabled   = bool
+    ipv6           = string
+    ipv6_enabled   = bool
+  }))
+  
 }
+

@@ -1,3 +1,3 @@
-output "network" {
-  value = lxd_network.network.name
+output "network_names" {
+  value = [for net in lxd_network.network : net.name]
 }

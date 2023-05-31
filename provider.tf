@@ -18,19 +18,29 @@ module "profile" {
   profile = {
       profile_name   = "salt-profile"
       pool_name      = "salt-pool"
-      volume_name    = "salt-volume"
+      volume_name    = "salt-volume"  
   }
 
 }
 module "network" {
   source = "./modules/network"
 
-  network = {
-      network_name   = "salt-network"
-      ipv4   = "192.168.0.1/24"   
+   networks = {
+    salt-network = {
+      ipv4           = "192.168.0.1/24"
+      ipv4_enabled   = true
+      ipv6           = "none"
+      ipv6_enabled   = false
+    }
+   
+    
+  }
+    
+    
   }
 
-}
+  
+
 
 
 
