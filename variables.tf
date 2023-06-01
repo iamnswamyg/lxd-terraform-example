@@ -21,6 +21,7 @@ variable "pools" {
  description = "A map of lxd storages"
     type           = map(object({
     driver         = string
+    size           = optional(string)
   }))
   
 }
@@ -46,10 +47,9 @@ variable "networks" {
 variable "instances" {
   description = "A map of salt configurations"
     type           = map(object({
-    name           = string
     ephemeral      = bool
     image          = string
-    profile        = string
+    profiles       = list(string)
     start          = bool
     pool_devices = list(object({
       volume       = string

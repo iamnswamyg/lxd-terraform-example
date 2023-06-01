@@ -1,11 +1,15 @@
-resource "lxd_container" "salt" {
+locals {
+  salt_ip = var.instances["salt-master"].nic_devices[0].properties.ipv4
+}
 
+resource "lxd_container" "salt" {
+  
   for_each = var.instances
 
-  name          = each.value.name
+  name          = each.key
   image         = each.value.image
   ephemeral     = each.value.ephemeral
-  profiles = [lxd_profile.profile[each.value.profile].name]
+  profiles    = [for profile in each.value.profiles : lxd_profile.profile[profile].name]
   
   dynamic "device" {
     for_each = each.value.share_devices
@@ -45,6 +49,36 @@ resource "lxd_container" "salt" {
   }
   }
   start_container = each.value.start
+
+provisioner "local-exec" {
+    command = <<EOF
+%{ if each.key == "salt-master" }
+ lxc exec ${each.key} -- bash -xe -c '
+ echo "interface: ${each.value.nic_devices[0].properties.ipv4}
+auto_accept: True
+gpg_keydir: /etc/salt/gpgkeys
+file_roots:
+  base:
+    - /srv/saltstack/salt
+pillar_roots:
+  base:
+    - /srv/saltstack/pillar
+    - /srv/saltstack/global_pillar">/etc/salt/master.d/local.conf
+  systemctl restart salt-master
+  echo "---after restart master config---"
+  cat /etc/salt/master.d/local.conf
+ '
+%{ else }
+lxc exec ${each.key} -- bash -xe -c '
+ echo "master: ${local.salt_ip}
+id: ${each.key}">/etc/salt/minion.d/local.conf
+systemctl restart salt-minion
+echo "---after restart minion config---"
+cat /etc/salt/minion.d/local.conf
+ '
+%{ endif }
+EOF
+}
 }
 
 
