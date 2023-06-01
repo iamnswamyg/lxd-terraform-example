@@ -28,7 +28,7 @@ variable "pools" {
 variable "storages" {
  description = "A map of lxd storages"
     type           = map(object({
-    pools         = string
+    pool         = string
   }))
   
 } 
