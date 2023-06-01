@@ -5,7 +5,7 @@ resource "lxd_container" "salt" {
   name          = each.value.name
   image         = each.value.image
   ephemeral     = each.value.ephemeral
-  profiles = [module.profile.profile_names[each.value.profile].name]
+  profiles = [lxd_profile.profile[each.value.profile].name]
   
   dynamic "device" {
     for_each = each.value.share_devices
@@ -23,11 +23,11 @@ resource "lxd_container" "salt" {
     for_each = each.value.pool_devices
     content {
       type        = "disk" 
-      name        = module.profile.storage_pools[device.value.properties.pool].name
+      name        = lxd_storage_pool.pool[device.value.properties.pool].name
     properties = {
-      source = "${module.profile.storage_volumes[device.value.volume].name}"
+      source = "${lxd_volume.volume[device.value.volume].name}"
       path = device.value.properties.path
-      pool = module.profile.storage_pools[device.value.properties.pool].name
+      pool = lxd_storage_pool.pool[device.value.properties.pool].name
     }
   }
   }
@@ -39,7 +39,7 @@ resource "lxd_container" "salt" {
       name        = device.value.name
     properties = {
       name                  = device.value.name
-      network               = "${module.network.network_names[device.value.properties.network].name}"
+      network               = "${lxd_network.network[device.value.properties.network].name}"
       "ipv4.address"        = device.value.properties.ipv4
     }
   }

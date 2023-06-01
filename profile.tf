@@ -8,7 +8,7 @@ resource "lxd_profile" "profile" {
       type        = "disk"
       name        = device.value.name
     properties = {
-      pool = "${module.volume.storage_pools[device.value.properties.pool].name}"
+      pool = "${lxd_storage_pool.pool[device.value.properties.pool].name}"
       path = device.value.properties.path
     }
   }

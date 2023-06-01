@@ -1,7 +1,7 @@
 resource "lxd_volume" "volume" {
   for_each = var.storages
   name = each.key
-  pool = "${module.pool.storage_pools[each.value.pool].name}"
+  pool = "${lxd_storage_pool.pool[each.value.pool].name}"
 }
 
 
